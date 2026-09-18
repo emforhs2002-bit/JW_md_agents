@@ -3,97 +3,198 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JW MD Agents 설치 안내</title>
+<title>JW MD Agents 설치 가이드</title>
 <style>
   :root{
     --bg:#0f1420; --card:#1a2130; --fg:#e8edf5; --muted:#9aa7bd;
     --accent:#5b8cff; --accent2:#7c5cff; --code:#0b0f18; --line:#2a3550; --ok:#3ecf8e;
+    --win:#202531; --winbar:#12151d; --menu:#2b3242; --hl:#3b6dff;
   }
   @media (prefers-color-scheme: light){
     :root{ --bg:#f4f6fb; --card:#ffffff; --fg:#141a24; --muted:#5a6678;
-      --accent:#3b6dff; --accent2:#6b45ff; --code:#0f1420; --line:#e2e8f2; --ok:#129a68; }
+      --accent:#3b6dff; --accent2:#6b45ff; --code:#0f1420; --line:#e2e8f2; --ok:#129a68;
+      --win:#f0f2f7; --winbar:#e4e8f0; --menu:#ffffff; --hl:#3b6dff; }
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--fg);
     font-family:-apple-system,"Segoe UI",Roboto,"Malgun Gothic",sans-serif;line-height:1.6}
-  .wrap{max-width:720px;margin:0 auto;padding:56px 20px 80px}
+  .wrap{max-width:760px;margin:0 auto;padding:52px 20px 90px}
   .badge{display:inline-block;font-size:13px;color:var(--accent);
-    border:1px solid var(--line);border-radius:999px;padding:4px 12px;margin-bottom:20px}
+    border:1px solid var(--line);border-radius:999px;padding:4px 12px;margin-bottom:18px}
   h1{font-size:34px;margin:0 0 8px;letter-spacing:-.02em;
     background:linear-gradient(90deg,var(--accent),var(--accent2));
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  .sub{color:var(--muted);font-size:17px;margin:0 0 36px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;
-    padding:24px;margin:0 0 20px}
-  .step{display:flex;gap:14px;align-items:flex-start;margin:0 0 8px}
-  .num{flex:0 0 28px;height:28px;border-radius:50%;background:var(--accent);
-    color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px}
-  .step h3{margin:2px 0 4px;font-size:16px}
-  .step p{margin:0 0 4px;color:var(--muted);font-size:14px}
+  .sub{color:var(--muted);font-size:17px;margin:0 0 40px}
+
+  .step{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:22px 22px 24px;margin:0 0 20px}
+  .head{display:flex;gap:13px;align-items:center;margin:0 0 14px}
+  .num{flex:0 0 30px;height:30px;border-radius:50%;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    color:#fff;display:grid;place-items:center;font-weight:800;font-size:15px}
+  .head h2{margin:0;font-size:18px}
+  .head .t{color:var(--muted);font-size:13px}
+
   .codebox{position:relative;background:var(--code);border-radius:12px;
-    padding:16px 52px 16px 16px;margin:10px 0 0;overflow-x:auto}
+    padding:15px 52px 15px 15px;margin:10px 0 0;overflow-x:auto}
   .codebox code{color:#dce6ff;font-family:"SFMono-Regular",Consolas,monospace;
     font-size:14px;white-space:pre}
-  .copy{position:absolute;top:10px;right:10px;background:var(--line);border:0;
+  .copy{position:absolute;top:9px;right:9px;background:var(--line);border:0;
     color:var(--fg);border-radius:8px;padding:6px 10px;font-size:12px;cursor:pointer}
   .copy:hover{background:var(--accent);color:#fff}
   .copy.done{background:var(--ok);color:#fff}
-  .feat{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
-  @media(max-width:520px){.feat{grid-template-columns:1fr}}
-  .feat div{background:var(--card);border:1px solid var(--line);border-radius:12px;
-    padding:14px;font-size:14px}
+  .tip{color:var(--muted);font-size:13.5px;margin:12px 2px 0}
+  .tip b{color:var(--fg)}
+
+  /* ===== 목업 공통 ===== */
+  .mock{margin-top:14px;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+  .titlebar{background:var(--winbar);padding:8px 12px;display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted)}
+  .dot{width:11px;height:11px;border-radius:50%}
+  .dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
+  .screen{background:var(--win);padding:16px}
+
+  /* 채팅 목업 */
+  .chat{display:flex;flex-direction:column;gap:10px}
+  .bubble{max-width:82%;padding:10px 13px;border-radius:13px;font-size:14px;white-space:pre-wrap}
+  .me{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:4px}
+  .ai{align-self:flex-start;background:var(--menu);border:1px solid var(--line);border-bottom-left-radius:4px}
+  .ai .who{font-size:11px;color:var(--muted);margin-bottom:3px}
+  .inputbar{margin-top:12px;display:flex;gap:8px;align-items:center;
+    background:var(--menu);border:1px solid var(--line);border-radius:10px;padding:9px 12px;color:var(--muted);font-size:13px}
+  .inputbar .send{margin-left:auto;background:var(--accent);color:#fff;border-radius:7px;padding:4px 10px;font-size:12px}
+
+  /* 작업표시줄 트레이 목업 */
+  .taskbar{background:var(--winbar);padding:10px 14px;display:flex;justify-content:flex-end;align-items:center;gap:16px;position:relative;min-height:56px}
+  .tray{display:flex;align-items:center;gap:14px;font-size:13px;color:var(--muted)}
+  .chev{font-size:16px;color:var(--accent);border:1px dashed var(--accent);border-radius:6px;padding:1px 7px}
+  .clock{text-align:right;font-size:12px;color:var(--muted);line-height:1.2}
+  .popover{position:absolute;right:120px;bottom:52px;background:var(--menu);border:1px solid var(--line);
+    border-radius:10px;padding:12px;display:flex;gap:14px;box-shadow:0 8px 30px rgba(0,0,0,.35)}
+  .ic{width:34px;height:34px;border-radius:8px;display:grid;place-items:center;font-size:18px;background:var(--win)}
+  .ic.claude{outline:2px solid var(--accent);outline-offset:2px}
+  .ctxmenu{position:absolute;right:60px;bottom:44px;background:var(--menu);border:1px solid var(--line);
+    border-radius:9px;padding:5px;min-width:150px;box-shadow:0 8px 30px rgba(0,0,0,.4)}
+  .ctxmenu div{padding:7px 12px;border-radius:6px;font-size:13px}
+  .ctxmenu div.kill{background:var(--hl);color:#fff;font-weight:700}
+  .lbl{position:absolute;font-size:12px;color:var(--accent);font-weight:700}
+
+  .feat{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+  @media(max-width:520px){.feat{grid-template-columns:1fr}.wrap{padding-top:36px}}
+  .feat div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;font-size:13.5px}
   .feat b{display:block;margin-bottom:2px}
-  .note{color:var(--muted);font-size:13px;margin-top:24px;text-align:center}
+  .note{color:var(--muted);font-size:13px;margin-top:26px;text-align:center}
   a{color:var(--accent)}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <span class="badge">Claude Code 플러그인</span>
+  <span class="badge">Claude Code 설치 가이드 · 딱 한 번만</span>
   <h1>JW MD Agents</h1>
-  <p class="sub">281개 도메인 전문가 + 첫 질문 자동 라우팅. Claude Code에 명령어 두 줄로 설치.</p>
+  <p class="sub">281개 전문가 + 자동 라우팅. 아래 순서대로 따라 하면 끝. 5분이면 됩니다.</p>
 
-  <div class="card">
-    <div class="step">
+  <!-- STEP 1 -->
+  <div class="step">
+    <div class="head">
       <div class="num">1</div>
-      <div>
-        <h3>마켓플레이스 등록</h3>
-        <p>Claude Code 대화창에 붙여넣기</p>
-      </div>
+      <div><h2>Claude Code에서 명령어 두 줄 입력</h2>
+      <div class="t">Claude 실행 → 왼쪽 <b>Code</b> → <b>새 대화(새로 생성)</b> → 아래를 한 줄씩 붙여넣고 Enter</div></div>
     </div>
     <div class="codebox">
       <code id="c1">/plugin marketplace add emforhs2002-bit/JW_md_agents</code>
       <button class="copy" data-t="c1">복사</button>
-    </div>
-
-    <div class="step" style="margin-top:22px">
-      <div class="num">2</div>
-      <div>
-        <h3>플러그인 설치</h3>
-        <p>이어서 붙여넣기</p>
-      </div>
     </div>
     <div class="codebox">
       <code id="c2">/plugin install company-agents</code>
       <button class="copy" data-t="c2">복사</button>
     </div>
 
-    <div class="step" style="margin-top:22px">
-      <div class="num">3</div>
-      <div>
-        <h3>Claude Code 재시작</h3>
-        <p>새 대화를 열면 적용됩니다. 끝!</p>
+    <div class="mock">
+      <div class="titlebar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>&nbsp; Claude — Code</div>
+      <div class="screen">
+        <div class="inputbar"><span>/plugin install company-agents</span><span class="send">↑ 전송</span></div>
+        <div class="tip" style="margin-top:10px">↑ 이렇게 입력창에 붙여넣고 Enter. 두 줄 다 실행하면 "설치 완료" 메시지가 뜹니다.</div>
       </div>
     </div>
   </div>
 
-  <div class="card">
-    <h3 style="margin:0 0 6px">설치하면</h3>
+  <!-- STEP 2 -->
+  <div class="step">
+    <div class="head">
+      <div class="num">2</div>
+      <div><h2>Claude 완전 종료 (재시작 준비)</h2>
+      <div class="t">그냥 창 닫기(X)로는 부족합니다. <b>작업표시줄 우측 하단</b>에서 완전 종료해야 새 기능이 켜집니다.</div></div>
+    </div>
+    <div class="mock">
+      <div class="titlebar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>&nbsp; Windows 작업표시줄 (오른쪽 아래)</div>
+      <div class="screen" style="padding:0">
+        <div class="taskbar">
+          <!-- 우클릭 메뉴 -->
+          <div class="ctxmenu">
+            <div>설정 열기</div>
+            <div class="kill">종료 (Quit) ← 클릭</div>
+          </div>
+          <!-- 숨겨진 아이콘 팝오버 -->
+          <div class="popover">
+            <div class="ic claude">🟠</div>
+            <div class="ic">🔊</div>
+            <div class="ic">📶</div>
+          </div>
+          <span class="lbl" style="right:150px;bottom:96px">① 숨겨진 아이콘의 Claude(주황) 위에서 마우스 <b>오른쪽 클릭</b></span>
+          <span class="lbl" style="right:60px;bottom:104px">② 뜬 메뉴에서 <b>종료</b> 클릭</span>
+          <div class="tray">
+            <span class="chev">⌃</span>
+            <span>🔋</span>
+            <div class="clock">오후 2:14<br>2026-09-18</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tip"><b>순서:</b> 작업표시줄 오른쪽 끝의 <b>⌃(위 화살표)</b> 클릭 → 숨겨진 아이콘 중 <b>주황색 Claude</b> 아이콘에 마우스 <b>오른쪽 클릭</b> → <b>종료</b> 클릭.</div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step">
+    <div class="head">
+      <div class="num">3</div>
+      <div><h2>Claude 다시 켜고 새 대화 열기</h2>
+      <div class="t">Claude를 다시 실행 → <b>Code</b> → <b>새 대화(새로 생성)</b>. 이제 전문가와 자동 라우팅이 켜진 상태입니다.</div></div>
+    </div>
+    <div class="mock">
+      <div class="titlebar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>&nbsp; Claude — Code (재시작 후)</div>
+      <div class="screen">
+        <div class="inputbar"><span>여기에 무엇이든 물어보세요…</span><span class="send">↑ 전송</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step">
+    <div class="head">
+      <div class="num">4</div>
+      <div><h2>끝! 이제 질문만 하면 전문가가 붙습니다</h2>
+      <div class="t">첫 질문을 하면 알맞은 전문가를 제안 → "네"라고 답하면 자동 적용됩니다.</div></div>
+    </div>
+    <div class="mock">
+      <div class="titlebar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>&nbsp; 실제 동작 예시</div>
+      <div class="screen">
+        <div class="chat">
+          <div class="bubble me">세무 절세 상담 좀 해줘</div>
+          <div class="bubble ai"><div class="who">Claude</div>지금 질문은 세무 작업 같아요. '세무 전략가' 전문가를 쓸까요? (예/아니오)</div>
+          <div class="bubble me">네</div>
+          <div class="bubble ai"><div class="who">Claude · 세무 전략가 ✅ 자동 적용됨</div>세무 전략가로 진행할게요. 먼저 사업 형태와 예상 매출부터 확인하겠습니다…</div>
+        </div>
+      </div>
+    </div>
+    <div class="tip">단순한 질문이나 잡담이면 묻지 않고 바로 답합니다. 안 귀찮아요.</div>
+  </div>
+
+  <div class="step">
+    <div class="head"><div class="num">✓</div><div><h2>설치하면 생기는 것</h2></div></div>
     <div class="feat">
       <div><b>281개 전문가</b>기획·개발·마케팅·재무·법무·GIS·데이터·보안 등</div>
-      <div><b>자동 제안</b>질문 보고 "OO 전문가 쓸까요?" 하고 물어봄</div>
+      <div><b>자동 제안</b>질문 보고 "OO 전문가 쓸까요?"</div>
       <div><b>안 귀찮게</b>단순 질문·잡담은 그냥 바로 답변</div>
-      <div><b>한 줄 업데이트</b>/plugin marketplace update jw-md-agents</div>
+      <div><b>업데이트 한 줄</b>/plugin marketplace update jw-md-agents</div>
     </div>
   </div>
 
@@ -106,7 +207,7 @@ document.querySelectorAll('.copy').forEach(function(b){
     navigator.clipboard.writeText(t).then(function(){
       b.textContent='복사됨';b.classList.add('done');
       setTimeout(function(){b.textContent='복사';b.classList.remove('done')},1500);
-    });
+    }).catch(function(){ b.textContent='직접 복사'; });
   });
 });
 </script>
