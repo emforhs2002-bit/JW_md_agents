@@ -1,0 +1,17 @@
+{
+  "name": "jw-md-agents",
+  "owner": {
+    "name": "emforhs2002-bit"
+  },
+  "metadata": {
+    "description": "JW 전문가 에이전트 팩 - 281개 도메인 전문가 + 자동 라우팅",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "company-agents",
+      "source": "./plugins/company-agents",
+      "description": "기획·개발·마케팅·재무·법무·GIS·데이터 등 281개 도메인 전문가 에이전트와, 첫 질문을 보고 알맞은 전문가를 제안하는 자동 라우팅 규칙."
+    }
+  ]
+}

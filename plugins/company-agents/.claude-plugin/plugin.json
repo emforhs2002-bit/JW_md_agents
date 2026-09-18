@@ -1,0 +1,8 @@
+{
+  "name": "company-agents",
+  "description": "281개 도메인 전문가 에이전트 팩. 설치하면 첫 질문을 보고 알맞은 전문가를 제안하는 자동 라우팅 규칙도 함께 켜집니다.",
+  "version": "1.0.0",
+  "author": {
+    "name": "emforhs2002-bit"
+  }
+}

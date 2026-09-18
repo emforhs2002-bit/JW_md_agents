@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JW MD Agents 설치 안내</title>
+<style>
+  :root{
+    --bg:#0f1420; --card:#1a2130; --fg:#e8edf5; --muted:#9aa7bd;
+    --accent:#5b8cff; --accent2:#7c5cff; --code:#0b0f18; --line:#2a3550; --ok:#3ecf8e;
+  }
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#f4f6fb; --card:#ffffff; --fg:#141a24; --muted:#5a6678;
+      --accent:#3b6dff; --accent2:#6b45ff; --code:#0f1420; --line:#e2e8f2; --ok:#129a68; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+    font-family:-apple-system,"Segoe UI",Roboto,"Malgun Gothic",sans-serif;line-height:1.6}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 20px 80px}
+  .badge{display:inline-block;font-size:13px;color:var(--accent);
+    border:1px solid var(--line);border-radius:999px;padding:4px 12px;margin-bottom:20px}
+  h1{font-size:34px;margin:0 0 8px;letter-spacing:-.02em;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .sub{color:var(--muted);font-size:17px;margin:0 0 36px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:24px;margin:0 0 20px}
+  .step{display:flex;gap:14px;align-items:flex-start;margin:0 0 8px}
+  .num{flex:0 0 28px;height:28px;border-radius:50%;background:var(--accent);
+    color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px}
+  .step h3{margin:2px 0 4px;font-size:16px}
+  .step p{margin:0 0 4px;color:var(--muted);font-size:14px}
+  .codebox{position:relative;background:var(--code);border-radius:12px;
+    padding:16px 52px 16px 16px;margin:10px 0 0;overflow-x:auto}
+  .codebox code{color:#dce6ff;font-family:"SFMono-Regular",Consolas,monospace;
+    font-size:14px;white-space:pre}
+  .copy{position:absolute;top:10px;right:10px;background:var(--line);border:0;
+    color:var(--fg);border-radius:8px;padding:6px 10px;font-size:12px;cursor:pointer}
+  .copy:hover{background:var(--accent);color:#fff}
+  .copy.done{background:var(--ok);color:#fff}
+  .feat{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+  @media(max-width:520px){.feat{grid-template-columns:1fr}}
+  .feat div{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:14px;font-size:14px}
+  .feat b{display:block;margin-bottom:2px}
+  .note{color:var(--muted);font-size:13px;margin-top:24px;text-align:center}
+  a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="badge">Claude Code 플러그인</span>
+  <h1>JW MD Agents</h1>
+  <p class="sub">281개 도메인 전문가 + 첫 질문 자동 라우팅. Claude Code에 명령어 두 줄로 설치.</p>
+
+  <div class="card">
+    <div class="step">
+      <div class="num">1</div>
+      <div>
+        <h3>마켓플레이스 등록</h3>
+        <p>Claude Code 대화창에 붙여넣기</p>
+      </div>
+    </div>
+    <div class="codebox">
+      <code id="c1">/plugin marketplace add emforhs2002-bit/JW_md_agents</code>
+      <button class="copy" data-t="c1">복사</button>
+    </div>
+
+    <div class="step" style="margin-top:22px">
+      <div class="num">2</div>
+      <div>
+        <h3>플러그인 설치</h3>
+        <p>이어서 붙여넣기</p>
+      </div>
+    </div>
+    <div class="codebox">
+      <code id="c2">/plugin install company-agents</code>
+      <button class="copy" data-t="c2">복사</button>
+    </div>
+
+    <div class="step" style="margin-top:22px">
+      <div class="num">3</div>
+      <div>
+        <h3>Claude Code 재시작</h3>
+        <p>새 대화를 열면 적용됩니다. 끝!</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin:0 0 6px">설치하면</h3>
+    <div class="feat">
+      <div><b>281개 전문가</b>기획·개발·마케팅·재무·법무·GIS·데이터·보안 등</div>
+      <div><b>자동 제안</b>질문 보고 "OO 전문가 쓸까요?" 하고 물어봄</div>
+      <div><b>안 귀찮게</b>단순 질문·잡담은 그냥 바로 답변</div>
+      <div><b>한 줄 업데이트</b>/plugin marketplace update jw-md-agents</div>
+    </div>
+  </div>
+
+  <p class="note">문제가 있으면 김진우에게 문의 · GitHub: emforhs2002-bit/JW_md_agents</p>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=document.getElementById(b.dataset.t).innerText;
+    navigator.clipboard.writeText(t).then(function(){
+      b.textContent='복사됨';b.classList.add('done');
+      setTimeout(function(){b.textContent='복사';b.classList.remove('done')},1500);
+    });
+  });
+});
+</script>
+</body>
+</html>
